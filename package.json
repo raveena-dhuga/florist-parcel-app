@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel",
-    "build":  "parcel build --dist-dir public && cp src/Images/*.* public"
+    "build":  "parcel build --dist-dir public && cp src/Images/*.* public && cp src/_redirects public"
   },
   "author": "",
   "license": "ISC",
