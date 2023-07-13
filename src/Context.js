@@ -6,7 +6,7 @@ const Context = React.createContext()
 function ContextProvider(props) {
 
     const [bouqets, setBouqets] = useState(JSON.parse(localStorage.getItem('bouqets')) || data)
-    const [basketItems, setBasketItems] = useState([])
+    const [basketItems, setBasketItems] = useState(JSON.parse(localStorage.getItem('basket')) || [])
 
     function toggleFavourite(id) {
         const newBouqets = bouqets.map(item => {
@@ -25,11 +25,15 @@ function ContextProvider(props) {
     }
 
     function addToBasket(newBouqet) {
-        setBasketItems(prev => [...prev, newBouqet])
+        const newBasket = [...basketItems, newBouqet]
+        localStorage.setItem('basket', JSON.stringify(newBasket))
+        setBasketItems(newBasket)
     }
 
     function removeFromBasket(id) {
-        setBasketItems(prev => prev.filter(item => item.id !== id))
+        const filteredBasket = basketItems.filter(item => item.id !== id)
+        localStorage.setItem('basket', JSON.stringify(filteredBasket))
+        setBasketItems(filteredBasket)
     }
 
     function favouriteToBasket(id) {
